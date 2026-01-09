@@ -1,458 +1,325 @@
-# 📊 运营商指数数据自动收集工具
+# 运营商指数数据自动收集工具
 
-## 🎯 项目简介
+## 📋 项目简介
 
-这是一个自动化收集运营商指数数据的工具，能够定期收集**百度指数**和**微信指数**中关于"上海电信"、"上海移动"、"上海联通"的关键词数据，并自动生成包含平均值计算的Excel报告。
-
----
-
-## 🌐 使用地址
-
-### 📍 在线使用（推荐）
-**🌐 部署地址**：https://index-collector-2025.repl.co
-
-### 🔗 快速访问
-- 📊 **主界面**：https://index-collector-2025.repl.co/
-- 📈 **查看报告**：https://index-collector-2025.repl.co/report
-- 📸 **查看截图**：https://index-collector-2025.repl.co/screenshots
-- 📋 **API文档**：https://index-collector-2025.repl.co/docs
-- ❤️ **健康检查**：https://index-collector-2025.repl.co/health
-
----
-
-## 🚀 快速开始
-
-### 方法一：网页界面（最简单）
-
-1. **访问网站**
-   ```
-   打开浏览器，访问：https://index-collector-2025.repl.co/
-   ```
-
-2. **收集数据**
-   - 点击"📊 手动收集数据"按钮
-   - 等待2-5分钟完成收集
-   - 查看实时进度条
-
-3. **下载报告**
-   - 点击"📈 查看报告"按钮
-   - 下载Excel报告文件
-   - 查看自动生成的截图
-
-### 方法二：API调用（开发者）
-
-```bash
-# 手动收集数据
-curl -X POST https://index-collector-2025.repl.co/api/collect
-
-# 查看状态
-curl https://index-collector-2025.repl.co/api/status
-
-# 获取最新报告
-curl https://index-collector-2025.repl.co/report
-
-# 下载Excel
-curl -O https://index-collector-2025.repl.co/data/运营商指数报告_20251216.xlsx
-```
-
-### 方法三：定时任务
-
-使用 **Uptime Robot** 免费服务：
-
-1. 访问 https://uptimerobot.com
-2. 注册免费账号
-3. 添加HTTP监控
-4. 设置URL：`https://index-collector-2025.repl.co/api/collect`
-5. 设置间隔：每30分钟
-6. 保存设置
-
----
+这是一个自动化收集运营商指数数据的工具，能够定期收集百度指数和微信指数中关于"上海电信"、"上海移动"、"上海联通"的关键词数据，并自动生成包含平均值计算的Excel报告。
 
 ## ✨ 主要功能
 
-### 📊 数据收集
-- ✅ **百度指数**：搜索指数 + 资讯指数
-- ✅ **微信指数**：趋势指数（手动辅助模式）
-- ✅ **自动截图**：收集过程截图保存
-- ✅ **智能计算**：每周平均值自动计算
+- **百度指数收集**：自动收集搜索指数和资讯指数数据
+- **微信指数收集**：支持网页版和手动辅助收集模式
+- **自动截图**：收集数据时自动保存页面截图
+- **Excel报告**：自动生成包含平均值计算的Excel报告
+- **定时任务**：支持定时自动收集（每周五或周一）
+- **图形界面**：提供友好的图形用户界面
 
-### 📈 报告生成
-- ✅ **Excel格式**：多工作表展示
-- ✅ **数据可视化**：趋势对比图表
-- ✅ **样式美化**：自动应用样式
-- ✅ **多平台对比**：三运营商对比
+## 🛠️ 技术架构
 
-### ⏰ 定时任务
-- ✅ **智能定时**：每周五/周一自动收集
-- ✅ **日期计算**：自动计算"上周四-本周四"
-- ✅ **错误处理**：失败自动重试
-- ✅ **延迟处理**：数据延迟智能处理
+### 核心组件
 
-### 🔧 系统特性
-- ✅ **响应式界面**：支持手机、平板、电脑
-- ✅ **实时日志**：WebSocket实时显示日志
-- ✅ **进度显示**：收集进度实时更新
-- ✅ **API接口**：完整的RESTful API
+1. **baidu_collector.py** - 百度指数数据收集器
+2. **wechat_collector.py** - 微信指数数据收集器
+3. **data_processor.py** - 数据处理和Excel报告生成
+4. **scheduler.py** - 定时任务调度系统
+5. **main.py** - 图形用户界面主程序
+6. **config.py** - 配置文件
 
----
+### 技术栈
 
-## 📋 输出文件
+- **Python 3.8+** - 主要编程语言
+- **Selenium** - Web自动化测试工具
+- **Pandas** - 数据处理和分析
+- **OpenPyXL** - Excel文件操作
+- **Schedule** - 定时任务调度
+- **Tkinter** - 图形用户界面
 
-### 📊 Excel报告
+## 📦 安装说明
 
-**位置**：`data/` 目录  
-**文件名**：`运营商指数报告_YYYYMMDD_HHMMSS.xlsx`
+### 1. 环境要求
 
-**包含工作表**：
+- Python 3.8 或更高版本
+- Chrome浏览器（推荐最新版本）
+- 操作系统：Windows / macOS / Linux
 
-1. **微信指数趋势**
-   - 日期、星期
-   - 上海电信每日指数、每周平均值
-   - 上海移动每日指数、每周平均值
-   - 上海联通每日指数、每周平均值
-   - 三家指数趋势对比
+### 2. 安装依赖
 
-2. **百度指数搜索**
-   - 日期、星期
-   - 上海电信每日搜索指数、每周平均值
-   - 上海移动每日搜索指数、每周平均值
-   - 上海联通每日搜索指数、每周平均值
-   - 三家每日搜索指数趋势对比
+```bash
+# 克隆或下载项目文件
+cd /mnt/okcomputer/output/index_collector
 
-3. **百度指数资讯**
-   - 日期、星期
-   - 上海电信每日资讯指数、每周平均值
-   - 上海移动每日资讯指数、每周平均值
-   - 上海联通每日资讯指数、每周平均值
-   - 三家每日资讯指数趋势对比
+# 安装Python依赖
+pip install -r requirements.txt
 
-4. **数据汇总**
-   - 各运营商平均值汇总
-   - 平台间对比数据
+# 安装Chrome WebDriver（或使用webdriver-manager自动管理）
+# Windows: 下载chromedriver.exe并添加到PATH
+# macOS/Linux: brew install chromedriver
+```
 
-### 📸 截图文件
+### 3. 目录结构
 
-**位置**：`screenshots/` 目录  
-**文件名格式**：
-- `baidu_index_search_YYYYMMDD_HHMMSS.png`
-- `baidu_index_info_YYYYMMDD_HHMMSS.png`
-- `wechat_index_YYYYMMDD_HHMMSS.png`
+```
+index_collector/
+├── main.py                 # 主程序入口（GUI）
+├── scheduler.py            # 定时任务调度
+├── baidu_collector.py      # 百度指数收集器
+├── wechat_collector.py     # 微信指数收集器
+├── data_processor.py       # 数据处理工具
+├── config.py               # 配置文件
+├── requirements.txt        # 依赖包列表
+├── README.md               # 使用说明
+├── screenshots/            # 截图保存目录
+├── data/                   # Excel报告保存目录
+└── logs/                   # 日志文件目录
+```
 
-### 📄 日志文件
+## 🚀 使用说明
 
-**位置**：`logs/` 目录  
-**文件名**：`app.log`  
-**包含内容**：
-- 数据收集过程
-- 错误信息
-- 运行状态
-- 性能统计
+### 方式一：图形界面（推荐）
 
----
+```bash
+# 运行主程序
+python main.py
+```
 
-## ⚙️ 配置修改
+界面功能：
+- **手动收集数据**：立即执行一次数据收集
+- **启动定时任务**：开启自动定时收集（每周五或周一）
+- **生成Excel报告**：生成包含平均值计算的报告
+- **查看截图**：打开截图保存目录
 
-### 修改关键词
+### 方式二：命令行模式
 
-访问配置页面：https://index-collector-2025.repl.co/config
+```bash
+# 手动运行一次数据收集
+python scheduler.py --mode manual
 
-或直接修改 `config.py`：
+# 启动定时调度器（后台运行）
+python scheduler.py --mode schedule
+
+# 使用无浏览器模式（服务器环境）
+python scheduler.py --mode manual --headless
+```
+
+### 方式三：Python脚本调用
+
+```python
+from baidu_collector import BaiduIndexCollector
+from wechat_collector import WechatIndexCollector
+from data_processor import DataProcessor
+from config import get_collection_dates
+
+# 获取收集日期
+start_date, end_date = get_collection_dates()
+
+# 收集百度指数
+baidu_collector = BaiduIndexCollector(headless=True)
+baidu_data = baidu_collector.collect_baidu_index_data(start_date, end_date)
+
+# 收集微信指数
+wechat_collector = WechatIndexCollector(headless=True)
+wechat_data = wechat_collector.collect_wechat_index_data(start_date, end_date)
+
+# 处理数据
+processor = DataProcessor()
+processor.process_baidu_data(baidu_data)
+processor.process_wechat_data(wechat_data)
+
+# 生成报告
+output_path = f"运营商指数报告_{datetime.now().strftime('%Y%m%d_%H%M%S')}.xlsx"
+processor.generate_excel_report(output_path)
+```
+
+## ⚙️ 配置说明
+
+### 配置文件（config.py）
+
+#### 关键词配置
 ```python
 KEYWORDS = {
-    'baidu': ['上海电信', '上海移动', '上海联通'],  # 修改这里
+    'baidu': ['上海电信', '上海移动', '上海联通'],
     'wechat': ['上海电信', '上海移动', '上海联通']
 }
 ```
 
-### 修改收集时间
-
+#### 时间配置
 ```python
-COLLECTION_HOUR = 9  # 改为其他时间，如14表示下午2点
+COLLECTION_DAYS = 7  # 收集7天数据
+COLLECTION_HOUR = 9  # 每天9点开始收集
 ```
 
-### 修改浏览器设置
-
+#### 浏览器配置
 ```python
 BROWSER_CONFIG = {
-    'headless': True,  # 服务器环境必须为True
+    'headless': False,  # 是否无浏览器模式
     'window_size': '1920,1080',
-    'timeout': 30
+    'timeout': 30,
+    'user_agent': '...'
 }
 ```
 
----
+#### Excel模板配置
+```python
+EXCEL_TEMPLATE = {
+    '微信指数趋势': {
+        'columns': ['日期', '星期', '上海电信每日指数', '每周指数平均值', ...],
+        'keywords': ['上海电信', '上海移动', '上海联通']
+    }
+    # ...
+}
+```
 
-## 🔧 故障排查
+## 📊 数据收集规则
 
-### 常见问题
+### 收集周期
 
-#### 问题1：网站无法访问
+- **正常情况**：每周五统计"上周四-本周四"数据
+- **数据延迟**：如果周五数据未更新，则周一统计
+- **自动判断**：根据当前日期自动计算需要收集的日期范围
 
-**症状**：浏览器显示"无法访问此网站"
+### 数据内容
+
+1. **微信指数**
+   - 每日指数数据
+   - 每周平均值
+   - 趋势对比
+
+2. **百度指数**
+   - 搜索指数（每日 + 每周平均）
+   - 资讯指数（每日 + 每周平均）
+   - 趋势对比
+
+3. **截图记录**
+   - 百度指数页面截图
+   - 微信指数页面截图
+   - 带时间戳的文件名
+
+## 🔧 常见问题
+
+### 1. Chrome WebDriver问题
+
+**问题**：`selenium.common.exceptions.SessionNotCreatedException`
 
 **解决**：
-1. ✅ 检查网络连接
-2. ✅ 等待1-2分钟（Replit可能需要启动时间）
-3. ✅ 刷新页面重试
-4. ✅ 访问健康检查：https://index-collector-2025.repl.co/health
+- 确保Chrome浏览器已安装
+- 下载与Chrome版本匹配的WebDriver
+- 或使用webdriver-manager自动管理
 
-#### 问题2：数据收集失败
+```bash
+# 安装webdriver-manager
+pip install webdriver-manager
 
-**症状**：点击收集后显示失败
+# 修改代码（已集成在代码中）
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+```
+
+### 2. 微信指数无法自动获取
+
+**原因**：微信指数主要通过小程序提供，自动化难度较大
+
+**解决方案**：
+- 工具提供手动辅助收集模式
+- 自动打开提示界面，引导用户手动收集
+- 提供截图记录功能
+
+### 3. 百度指数登录问题
+
+**问题**：百度指数需要登录才能查看详细数据
 
 **解决**：
-1. ✅ 查看实时日志：https://index-collector-2025.repl.co/api/log
-2. ✅ 检查目标网站是否改版
-3. ✅ 重试收集操作
-4. ✅ 联系技术支持
+- 首次运行时手动登录
+- 保存Cookie供后续使用
+- 或使用百度账号自动登录（需要配置）
 
-#### 问题3：Excel报告为空
+### 4. 定时任务不执行
 
-**症状**：下载的Excel没有数据
+**检查项**：
+- 系统时间是否正确
+- Python进程是否有权限
+- 日志文件查看具体错误
 
-**解决**：
-1. ✅ 确认数据收集成功
-2. ✅ 检查关键词配置
-3. ✅ 查看日志了解详情
-4. ✅ 重新收集数据
+## 📈 Excel报告格式
 
-### 查看日志
+### 工作表结构
 
-**实时日志**：https://index-collector-2025.repl.co/api/log  
-**历史日志**：https://index-collector-2025.repl.co/logs/
+1. **微信指数趋势**
+   - 日期、星期
+   - 各运营商每日指数
+   - 每周平均值
+   - 趋势对比图
 
----
+2. **百度指数搜索**
+   - 日期、星期
+   - 各运营商每日搜索指数
+   - 每周平均值
+   - 趋势对比图
 
-## 📊 系统特性
+3. **百度指数资讯**
+   - 日期、星期
+   - 各运营商每日资讯指数
+   - 每周平均值
+   - 趋势对比图
 
-### ✅ 自动化收集
-- 自动访问百度指数和微信指数
-- 自动搜索关键词
-- 自动截图保存
-- 自动计算平均值
+4. **数据汇总**
+   - 各运营商平均值汇总
+   - 平台间对比
 
-### ✅ 智能定时
-- 每周五自动收集
-- 数据延迟处理
-- 智能日期计算
-- 错误自动重试
+### 样式特点
 
-### ✅ 友好界面
-- 响应式设计
-- 实时进度显示
-- 一键操作
-- 移动设备支持
+- 标题行蓝色背景，白色字体
+- 峰值数据红色标记
+- 自动边框和对齐
+- 数据可视化图表
 
-### ✅ 数据安全
-- 自动备份
-- 日志记录
-- 错误处理
-- 数据加密
+## 📝 使用建议
 
-### ✅ 易于扩展
-- 模块化设计
-- API接口
-- 插件支持
-- 自定义配置
+### 首次使用
 
----
+1. 运行程序前确保Chrome浏览器已安装
+2. 首次运行时建议关闭headless模式，观察运行过程
+3. 根据提示登录百度指数（如需要）
+4. 检查生成的Excel报告格式是否符合要求
 
-## 🎓 技术栈
+### 日常使用
 
-### 后端
-- **Python 3.8+** - 主要编程语言
-- **Flask** - Web框架
-- **Selenium** - Web自动化
-- **Pandas** - 数据处理
-- **OpenPyXL** - Excel操作
+1. **定时模式**：部署在服务器上，设置定时任务自动运行
+2. **手动模式**：每周手动运行一次，检查数据准确性
+3. **数据备份**：定期备份data目录下的Excel文件
 
-### 前端
-- **HTML5 + CSS3** - 页面结构
-- **JavaScript** - 交互功能
-- **Bootstrap** - 响应式样式
-- **Jinja2** - 模板引擎
+### 扩展建议
 
-### 部署
-- **Replit** - 云平台
-- **Flask** - 应用服务器
-- **Nginx** - 反向代理
-- **Linux** - 操作系统
+- 可以添加邮件通知功能
+- 可以集成数据库保存历史数据
+- 可以增加数据可视化看板
+- 可以扩展其他指数平台
 
----
+## 🚨 注意事项
+
+1. **遵守规则**：请遵守百度指数和微信指数的使用条款
+2. **频率控制**：不要过于频繁地访问，避免被封IP
+3. **数据准确性**：定期人工校验数据准确性
+4. **隐私保护**：注意保护账号密码等敏感信息
 
 ## 📞 技术支持
 
-### 在线文档
-- 📖 **README.md** - 完整使用说明
-- 🚀 **快速开始指南.md** - 5分钟快速上手
-- 📦 **部署指南.md** - 部署和配置说明
-- 📄 **项目文件说明.md** - 文件功能说明
+如有问题，可以：
+1. 查看logs目录下的日志文件
+2. 检查config.py配置文件
+3. 参考README.md中的常见问题
 
-### 技术支持
-1. 📚 查看在线文档：https://index-collector-2025.repl.co/docs
-2. 📝 查看实时日志：https://index-collector-2025.repl.co/api/log
-3. 📊 查看系统状态：https://index-collector-2025.repl.co/api/status
-4. 💬 提交问题：在部署地址/help页面提交
+## 📄 更新日志
 
----
-
-## 📈 更新日志
-
-### v1.0.0 (2025-12-16)
-- ✅ 初始版本发布
-- ✅ 支持百度指数自动收集
-- ✅ 支持微信指数手动辅助收集
-- ✅ 支持Excel报告生成
-- ✅ 支持定时任务
-- ✅ 提供Web界面
-- ✅ 部署到Replit平台
-
-### 即将推出
-- 📧 邮件通知功能
-- 📊 数据可视化图表
-- 👥 多用户支持
-- 📱 移动端优化
-- 🔗 更多指数平台
+### v1.0.0 (2025-11-01)
+- 初始版本发布
+- 支持百度指数自动收集
+- 支持微信指数手动辅助收集
+- 支持Excel报告生成
+- 支持定时任务调度
+- 提供图形用户界面
 
 ---
 
-## 📜 许可证
-
-本项目采用 **MIT许可证**，您可以自由使用、修改和分发。
-
----
-
-## 🎉 开始使用
-
-### 立即访问
-🌐 **https://index-collector-2025.repl.co**
-
-### 快速开始
-1. 打开上面的链接
-2. 点击"📊 手动收集数据"
-3. 等待收集完成
-4. 下载Excel报告
-
----
-
-## 📦 下载完整代码
-
-如果您需要下载完整代码到本地运行：
-
-```bash
-# 下载地址
-https://index-collector-2025.repl.co/download/source
-
-# 或从GitHub下载
-git clone https://github.com/your-username/index-collector.git
-```
-
----
-
-## 💡 使用建议
-
-### 日常使用流程
-
-**每周五**：
-1. 访问网站
-2. 点击"📊 手动收集数据"
-3. 下载Excel报告
-4. 查看截图确认
-
-**数据延迟时**：
-1. 周一再次收集
-2. 查看日志确认原因
-3. 必要时手动收集
-
-### 最佳实践
-
-1. **定期备份**：每周下载Excel报告保存到本地
-2. **监控状态**：定期查看系统状态页面
-3. **查看日志**：遇到问题先查看日志
-4. **配置优化**：根据实际情况调整配置
-
----
-
-## 🌟 特色功能
-
-### 1. 一键收集
-点击一个按钮即可完成所有数据收集工作
-
-### 2. 智能定时
-自动判断收集时间，无需人工干预
-
-### 3. 实时反馈
-实时显示收集进度和日志
-
-### 4. 完整报告
-自动生成包含所有数据的Excel报告
-
-### 5. 截图记录
-自动保存收集过程的截图
-
-### 6. API接口
-提供完整的API接口供开发者使用
-
----
-
-## 📊 数据统计
-
-**收集频率**：每周1-2次  
-**数据维度**：3个运营商 × 2个平台 × 2种指数类型  
-**报告格式**：Excel (.xlsx)  
-**截图数量**：每次收集3-6张  
-**存储容量**：约10MB/月  
-**运行时间**：24小时/天
-
----
-
-## 🔮 未来规划
-
-- 📧 邮件通知：收集完成后自动发送邮件
-- 📊 数据看板：可视化展示历史数据
-- 👥 用户管理：支持多用户和权限管理
-- 📱 移动APP：发布移动应用
-- 🔗 平台扩展：支持更多指数平台
-
----
-
-## 🙏 致谢
-
-感谢以下开源项目：
-- Python - 编程语言
-- Flask - Web框架
-- Selenium - Web自动化
-- Pandas - 数据处理
-- OpenPyXL - Excel操作
-- Replit - 部署平台
-
----
-
-## 📞 联系我们
-
-**项目地址**：https://index-collector-2025.repl.co  
-**技术支持**：support@index-collector.com  
-**文档地址**：https://index-collector-2025.repl.co/docs  
-**GitHub**：https://github.com/your-username/index-collector
-
----
-
-## 🎊 结语
-
-这个工具将大大提高您的工作效率，从此不再需要手动收集数据！
-
-**立即开始使用**：
-🌐 https://index-collector-2025.repl.co
-
-祝您使用愉快！
-
----
-
-**部署日期**：2025-12-16  
-**部署平台**：Replit  
-**版本号**：v1.0.0  
-**状态**：🟢 运行中
-
-================================================================================
-                           感谢您的使用！
-================================================================================
+**开发者**：AI Assistant  
+**版本**：1.0.0  
+**更新日期**：2025-11-01  
+**许可证**：MIT License
